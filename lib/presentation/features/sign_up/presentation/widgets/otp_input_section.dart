@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:softweb_mobile_task/core/theme/app_colors.dart';
 import 'package:softweb_mobile_task/presentation/general_widgets/swb_form_field.dart';
-
 
 class OtpInputSection extends StatefulWidget {
   const OtpInputSection({super.key});
@@ -12,22 +9,24 @@ class OtpInputSection extends StatefulWidget {
 }
 
 class _OtpInputSectionState extends State<OtpInputSection> {
-  final int fieldCount = 6; // Total number of SwbFormfields
+ final int fieldCount = 6;
   List<FocusNode> _focusNodes = [];
 
   @override
   void initState() {
     super.initState();
+    // Initialize the FocusNodes
     _focusNodes = List.generate(fieldCount, (index) => FocusNode());
   }
 
   @override
   void dispose() {
+    // Clean up FocusNodes
     _focusNodes.forEach((node) => node.dispose());
     super.dispose();
   }
 
-  // Move focus to the next SwbFormfield when input is detected
+  // Move focus to the next field if a character is entered
   void _nextField(String value, int index) {
     if (value.length == 1) {
       if (index < fieldCount - 1) {
@@ -42,7 +41,9 @@ class _OtpInputSectionState extends State<OtpInputSection> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      child: Row(
+      child: 
+      
+     Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -60,7 +61,7 @@ class _OtpInputSectionState extends State<OtpInputSection> {
           '-',
           style: TextStyle(
             fontSize: 30,
-            color: Color(0xFFBFBFBF), // Adjusted color to match AppColors.primaryBFBFBF
+            color: Color(0xFFBFBFBF), // Replace with your AppColors if needed
           ),
         ),
         ...List.generate(3, (index) {
@@ -68,14 +69,14 @@ class _OtpInputSectionState extends State<OtpInputSection> {
             height: 112,
             width: 45,
             child: SwbFormfield(
-              focusNode: _focusNodes[index + 3], // Use remaining FocusNodes
+              focusNode: _focusNodes[index + 3], // Use the remaining focus nodes
               onChanged: (value) => _nextField(value, index + 3),
             ),
           );
         }),
       ],
     ),
-      
+
       // Row(
       //   crossAxisAlignment: CrossAxisAlignment.center,
       //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,12 +120,8 @@ class _OtpInputSectionState extends State<OtpInputSection> {
       //     ),
       //   ],
       // ),
-    
-    
     );
 
-    // SwbOtpField(
-    //   obscureText: false,
-    // );
+   
   }
 }

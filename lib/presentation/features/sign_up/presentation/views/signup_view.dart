@@ -72,21 +72,18 @@ class _SignUpViewState extends State<SignUpView> {
                     },
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: SwbSendButton(
-                    onTap: () {
-                      if (currentPage < pages.length - 1) {
-                        _pageController.nextPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      } else {
-                        context.pushNamed(Dashboard.routeName);
-                      }
-                    },
-                    title: currentPage == 0 ? 'Next' : 'Verify email',
-                  ),
+                SwbSendButton(
+                  onTap: () {
+                    if (currentPage < pages.length - 1) {
+                      _pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    } else {
+                      context.pushNamed(Dashboard.routeName);
+                    }
+                  },
+                  title: currentPage == 0 ? 'Next' : 'Verify email',
                 ),
                 const VerticalSpacing(32),
                 Row(
